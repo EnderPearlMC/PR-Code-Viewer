@@ -1,0 +1,11 @@
+HOME
+
+SET X:0 Y:0
+
+TOOL T:felt P:down
+ 
+MOVE X:0 Y:100 S:100 T:linear
+
+MOVE X:100 Y:100 S:100 T:cubic A:0 B:150 C:100 D:150 
+
+TOOL T:felt P:up 
