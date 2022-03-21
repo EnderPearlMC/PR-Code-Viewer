@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* 
 
     Code par NATHAN MARCHIORI 
@@ -169,5 +168,4 @@ function tool(toolElement) {
 function roundToOneDecimal(num)
 {
    return Math.round( num * 10 + Number.EPSILON ) / 10;
->>>>>>> 7aaf084339c868c131f22b2214b6f129522b41f3
 }

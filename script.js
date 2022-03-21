@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* 
 
     Code par AUGUSTIN BOUYER
@@ -548,5 +547,4 @@ function restart()
     startMovementHeadPos = headPos;
     bezierPoints = [];
     bezierStarted = false;
->>>>>>> 7aaf084339c868c131f22b2214b6f129522b41f3
 }
