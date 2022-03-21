@@ -25,3 +25,10 @@ input[type="file"]
 #restart:hover {
     color: rgb(175, 175, 175);
 }
+
+#dark_theme_btn
+{
+    position: absolute; left: 90%; top:5%;
+    height: 30px;
+    width: 30px;
+}
