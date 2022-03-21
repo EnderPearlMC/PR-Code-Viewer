@@ -1,0 +1,32 @@
+#dark_theme_btn
+{
+    width: 70px;
+    height: 30px;
+    position: absolute;
+    left: 90%;
+    top:5%;
+}
+
+#control_b
+{
+    position: absolute;
+    left: 70%;
+    top:5%;
+}
+
+#control_a
+{
+    position: absolute;
+    left: 30%;
+    top:5%;
+}
+
+#canvas
+{
+    background: rgb(224, 224, 224);
+}
+
+input[type="file"]
+{
+    position: absolute; left: 45%; top:5%;
+}
