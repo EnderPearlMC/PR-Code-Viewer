@@ -23,8 +23,8 @@ btn.addEventListener("click", () =>{
     } else if(!isBlack)
     {
     console.log('black');
-    canvas.style.backgroundColor = "#1c1b22";
-    html.style.backgroundColor = "#1c1b22";
+    canvas.style.backgroundColor = "#424141";
+    html.style.backgroundColor = "#424141";
     resetBtn.style.color = "#e0e0e0";
     inputBtn.style.color = "#e0e0e0";   
     isBlack = true;
