@@ -274,6 +274,8 @@ function drawLine()
 function setActions(act)
 {
     actions = act;
+    restart();
+    firstDraw = false;
     fileChosen = true;
 }
 
