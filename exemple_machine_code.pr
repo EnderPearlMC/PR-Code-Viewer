@@ -9,7 +9,7 @@ MOVE X:50 Y:50 S:100 T:linear
 MOVE X:50 Y:0 S:100 T:linear
 MOVE X:0 Y:0 S:100 T:linear
 TOOL T:felt P:up 
-MOVE X:50 Y:50 S:50 T:linear
+MOVE X:50 Y:50 S:100 T:linear
 TOOL T:felt P:down
 MOVE X:200 Y:100 S:100 T:cubic A:100 B:10 C:200 D:160
 MOVE X:250 Y:100 S:100 T:cubic A:200 B:0 C:250 D:200
