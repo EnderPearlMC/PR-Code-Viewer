@@ -41,6 +41,7 @@ var bezierStarted = false;
 var bezierPoints = [];
 
 var fileChosen = false;
+var firstDraw = false;
 
 startUpDraw();
 
@@ -63,7 +64,15 @@ function run()
         if (fileChosen)
         {
             
-            for (let s = 0; s < speed; s++)
+            let ts = speed;
+
+            if (!firstDraw)
+            {
+                firstDraw = true;
+                ts = 10000;
+            }
+
+            for (let s = 0; s < ts; s++)
             {
             
                 startUpDraw();
