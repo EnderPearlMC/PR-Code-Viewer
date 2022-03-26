@@ -45,7 +45,7 @@ var fileChosen = false;
 startUpDraw();
 
 var slider = document.getElementById("speed");
-var speed = 10;
+var speed = 1;
 
 var sliderChange = false;
 
@@ -62,18 +62,24 @@ function run()
     let interval = setInterval(() => {
         if (fileChosen)
         {
-            startUpDraw();
-
-            drawLine();
             
-            // draw head
-            ctx.fillStyle = "gold";
-            ctx.fillRect(headPos[0] * 5 + 100, headPos[1] * 5 + 100, 20, 20);
+            for (let s = 0; s < speed; s++)
+            {
+            
+                startUpDraw();
 
-            // action update
-            let act = actions[currentAction];
+                drawLine();
+                
+                // draw head
+                ctx.fillStyle = "gold";
+                ctx.fillRect(headPos[0] * 5 + 100, headPos[1] * 5 + 100, 20, 20);
 
-            determineAction(act);
+                // action update
+                let act = actions[currentAction];
+
+                determineAction(act);
+
+            }
 
         }
         if (sliderChange)
@@ -82,7 +88,7 @@ function run()
             run();
         }
 
-    }, speed);
+    }, 20);
 }
 
 function startUpDraw()
@@ -116,7 +122,7 @@ function determineAction(action)
         if (action["t"] == "linear")
         {
             move(action["x"], action["y"], action["s"]);
-            time += (action["s"] / 50) / Math.sqrt((action["x"] - startMovementHeadPos[0])**2 + (action["y"] - startMovementHeadPos[1])**2);
+            time += ((action["s"] / 50) / Math.sqrt((action["x"] - startMovementHeadPos[0])**2 + (action["y"] - startMovementHeadPos[1])**2));
         }
         if (action["t"] == "cubic")
         {
@@ -155,7 +161,7 @@ function determineAction(action)
             }
 
             cubic(action["x"], action["y"], action["ax"], action["bx"], action["ay"], action["by"], action["s"]);
-            time += (action["s"] / 50) / bezierPoints.length / (difference);
+            time += ((action["s"] / 50) / bezierPoints.length / (difference));
         }
 
         
