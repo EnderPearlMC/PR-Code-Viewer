@@ -3,7 +3,7 @@ var canvas = document.querySelector('canvas');
 var html = document.querySelector('html')
 var resetBtn = document.getElementById("restart")
 var inputBtn = document.querySelector('input[type=file]');
-console.log(inputBtn);
+var img = document.getElementById("img-in-btn-for-dark-theme")
 let isBlack = false;
 
 
@@ -18,15 +18,15 @@ btn.addEventListener("click", () =>{
         html.style.backgroundColor = "##e0e0e0";
         resetBtn.style.color = "#1c1b22";
         inputBtn.style.color = "#1c1b22";
+        img.src = "./img/moon.png"
         isBlack = false;
-        console.log('white');
     } else if(!isBlack)
     {
-    console.log('black');
     canvas.style.backgroundColor = "#424141";
     html.style.backgroundColor = "#424141";
     resetBtn.style.color = "#e0e0e0";
     inputBtn.style.color = "#e0e0e0";   
+    img.src = "./img/sun.png"
     isBlack = true;
     }
 })

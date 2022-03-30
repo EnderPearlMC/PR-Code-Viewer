@@ -24,6 +24,11 @@ input[type="file"]
 
 #restart:hover {
     color: rgb(175, 175, 175);
+
+}
+
+.circle:hover {
+    animation: resetrtn 3s ;
 }
 
 #dark_theme_btn
@@ -31,4 +36,20 @@ input[type="file"]
     position: absolute; left: 90%; top:5%;
     height: 30px;
     width: 30px;
+    visibility: hidden;
+}
+
+#img-in-btn-for-dark-theme
+{
+    position: absolute; left: 0%; top:0%;
+    height: 25px;
+    width: 25px;
+    visibility: visible;
+}
+
+@keyframes resetrtn
+{
+    from { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    to { transform: rotate(360deg);}
 }
