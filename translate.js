@@ -1,8 +1,3 @@
-/* 
-
-    Code par NATHAN MARCHIORI 
-
-*/
 let input = document.getElementById("pr_file_input");
 
 

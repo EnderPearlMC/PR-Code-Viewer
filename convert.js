@@ -1,9 +1,3 @@
-/* 
-
-    Code par AUGUSTIN BOUYER
-
-*/
-
 /**let inputS = document.getElementById("svg_file_input");
 
 
