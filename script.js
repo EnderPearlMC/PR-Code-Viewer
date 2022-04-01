@@ -9,7 +9,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 // State variable
-var STATE = "preview";
+var STATE = "convert";
 
 
 var COLORS = {
@@ -29,6 +29,7 @@ var COLORS = {
 }
 
 var penPosition = "up";
+var zoom = 2;
 
 var headPos = [0, 0];
 var startMovementHeadPos = headPos;
@@ -60,12 +61,16 @@ slider.oninput = function()
     speed = slider.value;
 }
 
+
+
 run();
 
 function run()
 {
     let interval = setInterval(() => {
 		
+        console.log(actions);
+
 		if (STATE == "preview")
 		{
 			if (fileChosen)
@@ -76,7 +81,7 @@ function run()
 				if (!firstDraw)
 				{
 					firstDraw = true;
-					ts = 10000;
+					ts = 1000000;
 				}
 
 				for (let s = 0; s < ts; s++)
@@ -122,8 +127,8 @@ function startUpDraw()
 		ctx.fillStyle = "rgb(146, 146, 146, 0.3)";
 		for(var i = 0; i < 100; i++)
 		{
-			ctx.fillRect(i * 50 + 100, 100, 5, 3000);
-			ctx.fillRect(100, i * 50 + 100, 3000, 5);
+			ctx.fillRect(i * (50 / zoom) + 100, 100, 5 / zoom, 3000);
+			ctx.fillRect(100, i * (50 / zoom) + 100, 3000, 5 / zoom);
 		}
 		document.getElementById("control_a").style.visibility = "visible";
 		document.getElementById("control_b").style.visibility = "visible";
@@ -276,7 +281,7 @@ function drawLine()
 
     // draw points
     ctx.beginPath();
-    ctx.lineWidth = "5";
+    ctx.lineWidth = (3 / zoom).toString();
     ctx.fillStyle = "black"
     for (var p = 0; p < points.length; p++)
     {

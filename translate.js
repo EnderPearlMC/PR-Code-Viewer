@@ -54,17 +54,17 @@ function moveT(moveElement) {
   moveElement = moveElement.split(" ");
   let result = {
     name: moveElement[0].toLowerCase(),
-    x: parseInt(moveElement[1].split(":")[1]),
-    y: parseInt(moveElement[2].split(":")[1]),
-    s: parseInt(moveElement[3].split(":")[1]),
+    x: Math.round(parseFloat(moveElement[1].split(":")[1]) * 100) / 100 / zoom,
+    y: Math.round(parseFloat(moveElement[2].split(":")[1]) * 100) / 100 / zoom,
+    s: Math.round(parseFloat(moveElement[3].split(":")[1]) * 100) / 100 / zoom,
     t: moveElement[4].split(":")[1],
   };
 
   if (result.t == "cubic") {
-    result.ax = parseInt(moveElement[5].split(":")[1]);
-    result.ay = parseInt(moveElement[6].split(":")[1]);
-    result.bx = parseInt(moveElement[7].split(":")[1]);
-    result.by = parseInt(moveElement[8].split(":")[1]);
+    result.ax = Math.round(parseFloat(moveElement[5].split(":")[1]) * 100) / 100 / zoom;
+    result.ay = Math.round(parseFloat(moveElement[6].split(":")[1]) * 100) / 100 / zoom;
+    result.bx = Math.round(parseFloat(moveElement[7].split(":")[1]) * 100) / 100 / zoom;
+    result.by = Math.round(parseFloat(moveElement[8].split(":")[1]) * 100) / 100 / zoom;
   }
 
   return result;
