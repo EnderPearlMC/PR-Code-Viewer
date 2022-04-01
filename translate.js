@@ -3,8 +3,7 @@
     Code par NATHAN MARCHIORI 
 
 */
-
-let input = document.querySelector("input");
+let input = document.getElementById("pr_file_input");
 
 
 //le boutton pour choisir le fichier

@@ -34,6 +34,16 @@ input[type="file"]
 
 }
 
+#convert_window
+{
+	position: absolute;
+	background: rgb(44, 44, 44);
+	width: 93%;
+	height: 80vh;
+	top : 130px;
+	left: 70px;
+}
+
 .circle:hover {
     animation: resetrtn 2s ;
 }

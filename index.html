@@ -10,7 +10,7 @@
 <body>
     
     <canvas id="canvas" width="1800%" height="900%"></canvas>
-    <input type="file" name="Ouvrir">
+    <input type="file" name="Ouvrir" id="pr_file_input">
 
     <div id="control_a">
         <span id="restart"  onclick="restart()">
@@ -31,7 +31,12 @@
         </button>
     </div>
 
+    <div id="convert_window">
+		<input type="file" name="Ouvrir" id="svg_file_input">
+	</div>
+
     <script src="translate.js"></script>
+	<script src="convert.js"></script>
     <script src="script.js"></script>
     <script src="themes.js"></script>
 

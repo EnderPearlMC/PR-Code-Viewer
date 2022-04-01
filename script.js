@@ -8,6 +8,10 @@ var canvas = document.getElementById("canvas");
 
 var ctx = canvas.getContext("2d");
 
+// State variable
+var STATE = "preview";
+
+
 var COLORS = {
     0: [0, 0, 0],
     1: [237, 0, 0],
@@ -61,36 +65,40 @@ run();
 function run()
 {
     let interval = setInterval(() => {
-        if (fileChosen)
-        {
-            
-            let ts = speed;
+		
+		if (STATE == "preview")
+		{
+			if (fileChosen)
+			{
+				
+				let ts = speed;
 
-            if (!firstDraw)
-            {
-                firstDraw = true;
-                ts = 10000;
-            }
+				if (!firstDraw)
+				{
+					firstDraw = true;
+					ts = 10000;
+				}
 
-            for (let s = 0; s < ts; s++)
-            {
-            
-                startUpDraw();
+				for (let s = 0; s < ts; s++)
+				{
+				
+					startUpDraw();
 
-                drawLine();
-                
-                // draw head
-                ctx.fillStyle = "gold";
-                ctx.fillRect(headPos[0] * 5 + 100, headPos[1] * 5 + 100, 20, 20);
+					drawLine();
+					
+					// draw head
+					ctx.fillStyle = "gold";
+					ctx.fillRect(headPos[0] * 5 + 100, headPos[1] * 5 + 100, 20, 20);
 
-                // action update
-                let act = actions[currentAction];
+					// action update
+					let act = actions[currentAction];
 
-                determineAction(act);
+					determineAction(act);
 
-            }
+				}
 
-        }
+			}
+		}
         if (sliderChange)
         {
             clearInterval(interval);
@@ -109,12 +117,26 @@ function startUpDraw()
     ctx.fillStyle = "green";
     ctx.fillRect(30, 50, 10, 300);
     
-    ctx.fillStyle = "rgb(146, 146, 146, 0.3)";
-    for(var i = 0; i < 100; i++)
-    {
-        ctx.fillRect(i * 50 + 100, 100, 5, 3000);
-        ctx.fillRect(100, i * 50 + 100, 3000, 5);
-    }
+	if (STATE == "preview")
+	{
+		ctx.fillStyle = "rgb(146, 146, 146, 0.3)";
+		for(var i = 0; i < 100; i++)
+		{
+			ctx.fillRect(i * 50 + 100, 100, 5, 3000);
+			ctx.fillRect(100, i * 50 + 100, 3000, 5);
+		}
+		document.getElementById("control_a").style.visibility = "visible";
+		document.getElementById("control_b").style.visibility = "visible";
+		document.getElementById("pr_file_input").style.visibility = "visible";
+		document.getElementById("convert_window").style.visibility = "hidden";
+	}
+	else if (STATE == "convert")
+	{
+		document.getElementById("control_a").style.visibility = "hidden";
+		document.getElementById("control_b").style.visibility = "hidden";
+		document.getElementById("pr_file_input").style.visibility = "hidden";
+		document.getElementById("convert_window").style.visibility = "visible";
+	}
 }
 
 
