@@ -23,7 +23,7 @@ var COLORS = {
 }
 
 var penPosition = "up";
-var zoom = 2;
+var zoom = 1;
 
 var headPos = [0, 0];
 var startMovementHeadPos = headPos;
@@ -75,7 +75,7 @@ function run()
 				if (!firstDraw)
 				{
 					firstDraw = true;
-					ts = 1000000;
+					ts = 10;
 				}
 
 				for (let s = 0; s < ts; s++)
