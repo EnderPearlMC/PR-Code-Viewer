@@ -1,16 +1,14 @@
-/* 
-
-    Code par AUGUSTIN BOUYER
-
-*/
 
 let inputS = document.getElementById("svg_file_input");
 let outputPrCode = [];
 let pen = "up";
 
+// remember start pos to allow Z command
+let pathStartPos = null;
+
 // conversion settings
 let SPEED = 100;
-let RESIZE = 2;
+let RESIZE = 1;
 
 //le boutton pour choisir le fichier
 inputS.addEventListener("change", () => {
@@ -39,7 +37,7 @@ function convert(svgText)
 {
   var parser = new DOMParser();
   var svg = parser.parseFromString(svgText, "image/svg+xml");
-  firstParse(svg.getElementById("svgg"));
+  firstParse(svg.getElementById("layer1"));
   
   // start preview
   setActions(outputPrCode);
@@ -58,6 +56,10 @@ function firstParse(elements)
     {
       parsePath(c);
     }
+    else if (c.nodeName == "g")
+    {
+      firstParse(c);
+    }
   });
 
 }
@@ -65,6 +67,14 @@ function firstParse(elements)
 function parsePath(element)
 {
 
+  try
+  {
+    pathStartPos = [outputPrCode[outputPrCode.length - 1].x, outputPrCode[outputPrCode.length - 1].y];
+  }
+  catch
+  {
+    pathStartPos = [0, 0];
+  }
 
   let splited = element.getAttribute("d").split(" ");
 
@@ -72,7 +82,7 @@ function parsePath(element)
 
   // Parsing
   let startedAction = "";
-  for (let i = 0; i < splited.length; i++)
+  for (let i = 0; i < splited.length + 1; i++)
   {
     if (!isNaN(parseInt(splited[i])))
     {
@@ -105,6 +115,10 @@ function parsePath(element)
     {
       parseCubic(a);
     }
+    else if (a.startsWith("Z"))
+    {
+      parseLinear(["Z", pathStartPos[0].toString(), pathStartPos[1].toString()]);
+    }
   });
   // end translating
 
@@ -135,8 +149,8 @@ function parseMove(element)
     "s": SPEED / zoom,
     "t": "linear"
   }
-  let x = element.split(" ")[0].substring(1);
-  let y = element.split(" ")[1];
+  let x = element.split(" ")[1];
+  let y = element.split(" ")[2];
   finalCommand["x"] = Math.round(parseFloat(x) * 100) / 100 / RESIZE / zoom;
   finalCommand["y"] = Math.round(parseFloat(y) * 100) / 100 / RESIZE / zoom;
   outputPrCode.push(finalCommand);
@@ -202,5 +216,8 @@ function parseCubic(element)
   finalCommand["bx"] = Math.round(parseFloat(bx) * 100) / 100 / RESIZE / zoom;
   finalCommand["by"] = Math.round(parseFloat(by) * 100) / 100 / RESIZE / zoom;
 
-  outputPrCode.push(finalCommand);
+  if (outputPrCode.includes(finalCommand))
+  {
+    outputPrCode.push(finalCommand);
+  }
 }
