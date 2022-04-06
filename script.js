@@ -62,8 +62,7 @@ run();
 function run()
 {
     let interval = setInterval(() => {
-		
-        console.log(actions);
+        
 
 		if (STATE == "preview")
 		{
