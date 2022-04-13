@@ -65,9 +65,17 @@ input[type="file"]
 
 #switch_mode
 {
-    position: absolute; left: 100%; top:5%;
+    position: absolute; left: 20%; top:5%;
     height: 30px;
     width: 30px;
+    visibility: hidden;
+}
+
+#switch_mode_img
+{
+    height: 25px;
+    position: absolute; left: 5%; top:5%;
+    visibility: visible;
 }
 
 @keyframes rotate
