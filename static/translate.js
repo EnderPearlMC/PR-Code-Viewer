@@ -11,7 +11,7 @@ input.addEventListener("change", () => {
     alert("please use a .pr file");
     return;
   }
-  console.log("File chosen");
+  console.log("pr chosen");
   let reader = new FileReader();
   reader.onload = (e) => {
     const file = e.target.result;

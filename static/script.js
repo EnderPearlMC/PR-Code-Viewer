@@ -1,5 +1,7 @@
 var canvas = document.getElementById("canvas");
 
+var switch_btn = document.getElementById("switch_mode");
+
 var ctx = canvas.getContext("2d");
 
 // State variable
@@ -55,7 +57,13 @@ slider.oninput = function()
     speed = slider.value;
 }
 
-
+switch_btn.addEventListener("click", () =>{
+    if (STATE == "convert")
+        {
+        STATE = "preview";
+    } else STATE = "convert";
+    startUpDraw()
+})
 
 run();
 
@@ -63,7 +71,7 @@ function run()
 {
     let interval = setInterval(() => {
 		
-        console.log(actions);
+        // console.log(actions);
 
 		if (STATE == "preview")
 		{
@@ -143,7 +151,9 @@ function startUpDraw()
 
 function determineAction(action)
 {
-
+    if (!action) {
+        return
+    }
     if (action["name"] == "move")
     {
         

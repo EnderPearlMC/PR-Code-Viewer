@@ -20,7 +20,7 @@ inputS.addEventListener("change", () => {
     alert("please use a .svg file");
     return;
   }
-  console.log("File chosen");
+  console.log("svg chosen");
   let reader = new FileReader();
   reader.onload = (e) => {
     const file = e.target.result;

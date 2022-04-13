@@ -1,0 +1,23 @@
+{
+  "name": "pr-code-viewer",
+  "version": "1.0.0",
+  "description": "A program that displays the path written in a .pr file (Homemade gcode-like machine instruction language). It will eventually be used by a homemade cnc pen plotter.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnderPearlMC/PR-Code-Viewer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EnderPearlMC/PR-Code-Viewer/issues"
+  },
+  "homepage": "https://github.com/EnderPearlMC/PR-Code-Viewer#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
