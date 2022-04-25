@@ -78,31 +78,15 @@ function run()
 			if (fileChosen)
 			{
 				
-				let ts = speed;
-
-				if (!firstDraw)
-				{
-					firstDraw = true;
-					ts = 10;
-				}
-
-				for (let s = 0; s < ts; s++)
-				{
+				startUpDraw();
+				drawLine();
 				
-					startUpDraw();
-
-					drawLine();
-					
-					// draw head
-					ctx.fillStyle = "gold";
-					ctx.fillRect(headPos[0] * 5 + 100, headPos[1] * 5 + 100, 20, 20);
-
-					// action update
-					let act = actions[currentAction];
-
-					determineAction(act);
-
-				}
+				// draw head
+				ctx.fillStyle = "gold";
+				ctx.fillRect(headPos[0] * 5 + 100, headPos[1] * 5 + 100, 20, 20);
+				// action update
+				let act = actions[currentAction];
+				determineAction(act);
 
 			}
 		}
@@ -112,7 +96,7 @@ function run()
             run();
         }
 
-    }, 20);
+    }, 1);
 }
 
 function startUpDraw()
@@ -162,7 +146,7 @@ function determineAction(action)
         if (action["t"] == "linear")
         {
             move(action["x"], action["y"], action["s"]);
-            time += ((action["s"] / 50) / Math.sqrt((action["x"] - startMovementHeadPos[0])**2 + (action["y"] - startMovementHeadPos[1])**2));
+            time += (((action["s"] / 50) / Math.sqrt((action["x"] - startMovementHeadPos[0])**2 + (action["y"] - startMovementHeadPos[1])**2))) * 10000000000;
         }
         if (action["t"] == "cubic")
         {
