@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/EnderPearlMC/PR-Code-Viewer#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "serialport": "^10.4.0"
   }
 }

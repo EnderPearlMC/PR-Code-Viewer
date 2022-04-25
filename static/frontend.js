@@ -6,7 +6,7 @@ btnmoncul.addEventListener("click", () =>{
 
 function postmooncul()
 {
-    var url = "http://localhost:3000/";
+    var url = "http://localhost:3000/home";
     var params = "lorem=ipsum&name=alpha";
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
