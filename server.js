@@ -8,9 +8,8 @@ app.get('/', (req, res) => {
     res.send()
 })
 
-app.post('/', (req, res) => {
-  console.log(res)
-  res.status(201).send('sdfkvjhnb')
+app.post('/home', (req, res) => {
+  console.log("jaaj")
 })    
 
 app.listen(port, () => {
