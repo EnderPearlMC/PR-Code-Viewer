@@ -1,13 +1,26 @@
-var btnmoncul = document.getElementById("moncul")
+var home = document.getElementById("home_btn")
+var xl = document.getElementById("xl_btn")
+var xp = document.getElementById("xp_btn")
 
-btnmoncul.addEventListener("click", () =>{
-    postmooncul()
+var pos = [0, 0];
+
+home.addEventListener("click", () =>{
+    sendCommand("home", "");
 })
 
-function postmooncul()
+xl.addEventListener("click", () =>{
+    pos[0] -= 10;
+    sendCommand("move", `x=${pos[0]}&y=0&s=3000`);
+})
+
+xp.addEventListener("click", () =>{
+    pos[0] += 10;
+    sendCommand("move", `x=${pos[0]}&y=0&s=3000`);
+})
+
+function sendCommand(cmd, params)
 {
-    var url = "http://localhost:3000/home";
-    var params = "lorem=ipsum&name=alpha";
+    var url = "http://localhost:3000/" + cmd;
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, true);
     

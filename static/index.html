@@ -25,6 +25,12 @@
         <input type="range" id="speed" min="1" max="100000" value="1" step="1">
     </div>
 
+    <div id="machine_control">
+        <div class="layer_one ctrl_layer"><button id="yl_btn" class="ctrl_btn">Y -</button></div>
+        <div class="layer_two ctrl_layer"><button id="xl_btn" class="ctrl_btn">X -</button><button id="home_btn" class="ctrl_btn">HOME<br>X Y Z</button><button id="xp_btn" class="ctrl_btn">X +</button></div>
+        <div class="layer_three ctrl_layer"><button id="yp_btn" class="ctrl_btn">Y +</button></div>
+    </div>
+
     <div class="theme_btn">
         <button id="dark_theme_btn">
                 <img src="img/moon.png" id="img-in-btn-for-dark-theme">
@@ -39,7 +45,6 @@
     <div id="convert_window">
 		<input type="file" name="Ouvrir" id="svg_file_input">
 	</div>
-    <button id="moncul"></button>
 
     <script src="frontend.js"></script>
     <script src="translate.js"></script>

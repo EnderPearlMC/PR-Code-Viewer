@@ -119,6 +119,7 @@ function startUpDraw()
 		document.getElementById("control_a").style.visibility = "visible";
 		document.getElementById("control_b").style.visibility = "visible";
 		document.getElementById("pr_file_input").style.visibility = "visible";
+        document.getElementById("machine_control").style.visibility = "visible";
 		document.getElementById("convert_window").style.visibility = "hidden";
 	}
 	else if (STATE == "convert")
@@ -126,6 +127,7 @@ function startUpDraw()
 		document.getElementById("control_a").style.visibility = "hidden";
 		document.getElementById("control_b").style.visibility = "hidden";
 		document.getElementById("pr_file_input").style.visibility = "hidden";
+        document.getElementById("machine_control").style.visibility = "hidden";
 		document.getElementById("convert_window").style.visibility = "visible";
 	}
 }
@@ -146,7 +148,7 @@ function determineAction(action)
         if (action["t"] == "linear")
         {
             move(action["x"], action["y"], action["s"]);
-            time += (((action["s"] / 50) / Math.sqrt((action["x"] - startMovementHeadPos[0])**2 + (action["y"] - startMovementHeadPos[1])**2))) * 10000000000;
+            time += (((action["s"] / 50) / Math.sqrt((action["x"] - startMovementHeadPos[0])**2 + (action["y"] - startMovementHeadPos[1])**2))) * 10;
         }
         if (action["t"] == "cubic")
         {

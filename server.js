@@ -13,6 +13,9 @@ var Aport = new SerialPort({
 const port = 3000
 
 app.use(express.static('static'))
+app.use(express.urlencoded({
+  extended: true
+}))
 
 app.get('/', (req, res) => {
     res.send()
@@ -21,12 +24,18 @@ app.get('/', (req, res) => {
 // all commands
 
 app.post('/home', (req, res) => {
-  console.log("jaaaj");
-  Aport.write("H");
+  Aport.write("HOME");
+  res.end();
+})    
+
+app.post('/move', (req, res) => {
+  console.log(`MOVE X:${req.body.x} Y:${req.body.y} S:${req.body.s}`);
+  Aport.write(`MOVE X:${req.body.x} Y:${req.body.y} S:${req.body.s}`);
+  res.end();
 })    
 
 // end
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`App listening on port ${port}`)
 })
