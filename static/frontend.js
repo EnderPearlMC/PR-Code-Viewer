@@ -6,6 +6,7 @@ var pos = [0, 0];
 
 home.addEventListener("click", () =>{
     sendCommand("home", "");
+    pos = [0, 0];
 })
 
 xl.addEventListener("click", () =>{
