@@ -38,9 +38,9 @@ sp.addEventListener("click", () =>{
     xhr.open("POST", url, true);
     
     //Send the proper header information along with the request
-    xhr.setRequestHeader("Content-type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     
-    xhr.send(actions);
+    xhr.send("c=" + JSON.stringify(resultTraductSvg));
 })
 
 function sendCommand(cmd, params)

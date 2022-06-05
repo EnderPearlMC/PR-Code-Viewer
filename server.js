@@ -35,8 +35,10 @@ app.post('/move', (req, res) => {
   res.end();
 })    
 
+
 app.post('/start', (req, res) => {
-  plotting.star;
+  console.log(JSON.parse(req.body.c));
+  plotting.start(JSON.parse(req.body.c), Aport);
   res.end();
 })    
 
