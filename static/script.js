@@ -57,6 +57,8 @@ slider.oninput = function()
     speed = slider.value;
 }
 
+
+// boutton pour changer de mode
 switch_btn.addEventListener("click", () =>{
     if (STATE == "convert")
         {

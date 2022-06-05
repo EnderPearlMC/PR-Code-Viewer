@@ -2,6 +2,7 @@
 let inputS = document.getElementById("svg_file_input");
 let outputPrCode = [];
 let pen = "up";
+var resultTraductSvg = [];
 
 // remember start pos to allow Z command
 let pathStartPos = null;
@@ -41,9 +42,9 @@ function convert(svgText)
   
   // start preview
   setActions(outputPrCode);
+  tranductInvers()
   restart();
   STATE = "preview";
-  
 }
 
 function firstParse(elements)
@@ -99,7 +100,7 @@ function parsePath(element)
     }
   }
   // end of parsing
- // console.log(svgActions)
+  // console.log(svgActions)
 
   // translating
   svgActions.forEach(a => {
@@ -220,4 +221,26 @@ function parseCubic(element)
   {
     outputPrCode.push(finalCommand);
   }
+}
+
+
+// traduit svg vers tableau que le server peut lire
+function tranductInvers() {
+  
+  actions.forEach(e => {
+
+    if (e.name == 'move')
+    {
+      if (e.x)
+      {
+        test1 = e.name.toUpperCase() + ' X:' + e.x + ' Y:' + e.y + ' S:' + e.s
+        resultTraductSvg.push(test1)
+      }
+      // if (e.p)
+      // {
+      //   test1 = e.name.toUpperCase() + ' T:' + e.t + ' P:' + e.p
+      //   resultTraductSvg.push(test1)
+      // }
+    }
+  });
 }
