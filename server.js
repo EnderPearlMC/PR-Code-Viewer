@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 const { SerialPort } = require('serialport')
+const plotting = require('./plotting');
 
 
 var Aport = new SerialPort({
@@ -24,13 +25,18 @@ app.get('/', (req, res) => {
 // all commands
 
 app.post('/home', (req, res) => {
-  Aport.write("HOME");
+  Aport.write("HOME\n");
   res.end();
 })    
 
 app.post('/move', (req, res) => {
-  console.log(`MOVE X:${req.body.x} Y:${req.body.y} S:${req.body.s}`);
-  Aport.write(`MOVE X:${req.body.x} Y:${req.body.y} S:${req.body.s}`);
+  console.log(`MOVE X:${req.body.x} Y:${req.body.y} S:${req.body.s}\n`);
+  Aport.write(`MOVE X:${req.body.x} Y:${req.body.y} S:${req.body.s}\n`);
+  res.end();
+})    
+
+app.post('/start', (req, res) => {
+  plotting.star;
   res.end();
 })    
 
