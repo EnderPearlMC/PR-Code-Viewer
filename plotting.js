@@ -16,13 +16,7 @@ module.exports = class Plotting
     }
     static runPlot()
     {
-        setInterval(() => {
-            if (this.currentAction <= this.actions.length)
-            {
-                console.log(this.actions[this.currentAction])
-                this.Aport.write(this.actions[this.currentAction]);
-                this.currentAction += 1;
-            }
-        }, 1000);
+        this.Aport.write(this.actions[this.currentAction]);
+            this.currentAction += 1;
     }
 }

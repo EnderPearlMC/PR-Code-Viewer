@@ -8,7 +8,7 @@ var resultTraductSvg = [];
 let pathStartPos = null;
 
 // conversion settings
-let SPEED = 100;
+let SPEED = 1200;
 let RESIZE = 1;
 
 //le boutton pour choisir le fichier
@@ -147,13 +147,13 @@ function parseMove(element)
     "name": "move",
     "x": "0",
     "y": "0",
-    "s": SPEED / zoom,
+    "s": SPEED,
     "t": "linear"
   }
   let x = element.split(" ")[1];
   let y = element.split(" ")[2];
-  finalCommand["x"] = Math.round(parseFloat(x) * 100) / 100 / RESIZE / zoom;
-  finalCommand["y"] = Math.round(parseFloat(y) * 100) / 100 / RESIZE / zoom;
+  finalCommand["x"] = Math.round(parseFloat(x) * 100) / 100;
+  finalCommand["y"] = Math.round(parseFloat(y) * 100) / 100;
   outputPrCode.push(finalCommand);
 }
 
@@ -172,13 +172,13 @@ function parseLinear(element)
     "name": "move",
     "x": "0",
     "y": "0",
-    "s": SPEED / zoom,
+    "s": SPEED,
     "t": "linear"
   }
   let x = element.split(" ")[1];
   let y = element.split(" ")[2];
-  finalCommand["x"] = Math.round(parseFloat(x) * 100) / 100 / RESIZE / zoom;
-  finalCommand["y"] = Math.round(parseFloat(y) * 100) / 100 / RESIZE / zoom;
+  finalCommand["x"] = Math.round(parseFloat(x) * 100) / 100;
+  finalCommand["y"] = Math.round(parseFloat(y) * 100) / 100;
   outputPrCode.push(finalCommand);
 }
 
@@ -197,7 +197,7 @@ function parseCubic(element)
     "name": "move",
     "x": "0",
     "y": "0",
-    "s": SPEED / zoom,
+    "s": 0,
     "t": "cubic",
     "ax": "0",
     "ay": "0",
@@ -233,7 +233,7 @@ function tranductInvers() {
     {
       if (e.x)
       {
-        test1 = e.name.toUpperCase() + ' X:' + e.x + ' Y:' + e.y + ' S:' + e.s
+        test1 = e.name.toUpperCase() + ' X:' + e.x + ' Y:' + e.y + ' S:' + e.s + "\n"
         resultTraductSvg.push(test1)
       }
       // if (e.p)

@@ -1,22 +1,23 @@
 
 const express = require('express')
 const app = express()
-// const { SerialPort } = require('serialport')
+const { SerialPort } = require('serialport')
 const plotting = require('./plotting');
+const bodyParser = require('body-parser')
 
+var plottingStarted = false;
 
-// var Aport = new SerialPort({
-//   path:"\\\\.\\COM5",
-//   baudRate:9600
-// });
+ var Aport = new SerialPort({
+   path:"\\\\.\\COM5",
+   baudRate:115200
+ });
 
 
 const port = 3000
 
 app.use(express.static('static'))
-app.use(express.urlencoded({
-  extended: true
-}))
+app.use(express.json({limit: '2500mb'}));
+app.use(express.urlencoded({limit: '2500mb'}));
 
 app.get('/', (req, res) => {
     res.send()
@@ -39,6 +40,7 @@ app.post('/move', (req, res) => {
 app.post('/start', (req, res) => {
   console.log(JSON.parse(req.body.c));
   plotting.start(JSON.parse(req.body.c), Aport);
+  plottingStarted = true;
   res.end();
 })    
 
@@ -46,4 +48,13 @@ app.post('/start', (req, res) => {
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
+})
+
+Aport.on('data', (data) => {
+  if (data == "g")
+  {
+    console.log("fef");
+    Aport.write(plotting.actions[plotting.currentAction]);
+    plotting.currentAction += 1;
+  }
 })
