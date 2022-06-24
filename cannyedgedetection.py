@@ -1,25 +1,21 @@
 import cv2
 from cv2 import Laplacian
+import numpy as np
+from matplotlib import pyplot as plt
 
-img = cv2.imread("test.png")
-img = cv2.resize(img, (300, 300))
+img = cv2.imread("test.png", cv2.IMREAD_GRAYSCALE)
+lap = cv2.Laplacian(img, cv2.CV_16S, ksize=3)
+lap = np.uint
+canny = cv2.Canny(img, 100, 200)
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+titles = ['img', 'canny']
+images = [hsv]
+for i in range(1):
+    plt.subplot(1, 2, i+1), plt.imshow(images[i])
+    plt.title(titles[i])
+    plt.xticks([]), plt.yticks([])
 
 
-#convert to gray
 
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-# blur img
-blur_img = cv2.GaussianBlur(img_gray, (3,3), 0)
-
-# edge detection
-edges = cv2.Canny(blur_img, 100, 200)
-
-# laplacian
-
-laplacian = cv2.Laplacian(blur_img, cv2.CV_64F)
-
-#show img
-
-cv2.imshow('image', edges)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.show()
