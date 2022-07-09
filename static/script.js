@@ -5,7 +5,7 @@ var switch_btn = document.getElementById("switch_mode");
 var ctx = canvas.getContext("2d");
 
 // State variable
-var STATE = "convert";
+var STATE = "preview";
 
 
 var COLORS = {
@@ -51,21 +51,21 @@ var speed = 1;
 
 var sliderChange = false;
 
-slider.oninput = function()
+/**slider.oninput = function()
 {
     sliderChange = true;
     speed = slider.value;
-}
+}**/
 
 
 // boutton pour changer de mode
-switch_btn.addEventListener("click", () =>{
+/**switch_btn.addEventListener("click", () =>{
     if (STATE == "convert")
         {
         STATE = "preview";
     } else STATE = "convert";
     startUpDraw()
-})
+})**/
 
 run();
 
@@ -85,10 +85,12 @@ function run()
 				
 				// draw head
 				ctx.fillStyle = "gold";
-				ctx.fillRect(headPos[0] * 5 + 100, headPos[1] * 5 + 100, 20, 20);
+				ctx.fillRect(headPos[0] * 5, headPos[1] * 5, 20, 20);
 				// action update
 				let act = actions[currentAction];
 				determineAction(act);
+
+                console.log("drawing");
 
 			}
 		}
@@ -105,32 +107,23 @@ function startUpDraw()
 {
     canvas.style.imageRendering = "pixelated";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "red";
-    ctx.fillRect(50, 30, 300, 10);
-    ctx.fillStyle = "green";
-    ctx.fillRect(30, 50, 10, 300);
+    ctx.fillStyle = "#2ED573";
+    ctx.fillRect(30, 735, 100, 10);
+    ctx.fillStyle = "#FF6348";
+    ctx.fillRect(20, 635, 10, 100);
     
 	if (STATE == "preview")
 	{
-		ctx.fillStyle = "rgb(146, 146, 146, 0.3)";
+		/**ctx.fillStyle = "rgb(146, 146, 146, 0.3)";
 		for(var i = 0; i < 100; i++)
 		{
 			ctx.fillRect(i * (50 / zoom) + 100, 100, 5 / zoom, 3000);
 			ctx.fillRect(100, i * (50 / zoom) + 100, 3000, 5 / zoom);
-		}
-		document.getElementById("control_a").style.visibility = "visible";
-		document.getElementById("control_b").style.visibility = "visible";
-		document.getElementById("pr_file_input").style.visibility = "visible";
-        document.getElementById("machine_control").style.visibility = "visible";
-		document.getElementById("convert_window").style.visibility = "hidden";
+		}**/
+	
 	}
 	else if (STATE == "convert")
 	{
-		document.getElementById("control_a").style.visibility = "hidden";
-		document.getElementById("control_b").style.visibility = "hidden";
-		document.getElementById("pr_file_input").style.visibility = "hidden";
-        document.getElementById("machine_control").style.visibility = "hidden";
-		document.getElementById("convert_window").style.visibility = "visible";
 	}
 }
 
@@ -273,8 +266,8 @@ function drawLine()
 
     // draw points
     ctx.beginPath();
-    ctx.lineWidth = (3 / zoom).toString();
-    ctx.fillStyle = "black"
+    ctx.lineWidth = (1.7 / zoom).toString();
+    ctx.fillStyle = "blue"
     for (var p = 0; p < points.length; p++)
     {
         if (points[p][2] == true)
@@ -285,7 +278,7 @@ function drawLine()
             ctx.stroke();
             ctx.beginPath();
         }
-        ctx.lineTo(points[p][0] + 100, points[p][1] + 100)
+        ctx.lineTo(points[p][0], points[p][1])
     }
     ctx.stroke();
 }

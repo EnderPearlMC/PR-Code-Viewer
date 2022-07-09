@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const { SerialPort } = require('serialport')
 const plotting = require('./plotting');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser') 
 
 var plottingStarted = false;
 
@@ -53,7 +53,6 @@ app.listen(port, () => {
 Aport.on('data', (data) => {
   if (data == "g")
   {
-    console.log("fef");
     Aport.write(plotting.actions[plotting.currentAction]);
     plotting.currentAction += 1;
   }

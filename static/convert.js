@@ -3,12 +3,14 @@ let inputS = document.getElementById("svg_file_input");
 let outputPrCode = [];
 let pen = "up";
 var resultTraductSvg = [];
+let transform = [];
 
 // remember start pos to allow Z command
 let pathStartPos = null;
 
 // conversion settings
-let SPEED = 1200;
+let SPEED = 2600;
+let TRAVEL_SPEED = 12000;
 let RESIZE = 1;
 
 //le boutton pour choisir le fichier
@@ -77,30 +79,24 @@ function parsePath(element)
     pathStartPos = [0, 0];
   }
 
-  let splited = element.getAttribute("d").split(" ");
-
   let svgActions = [];
 
-  // Parsing
-  let startedAction = "";
-  for (let i = 0; i < splited.length + 1; i++)
+  let str = element.getAttribute("d");
+
+  let splited = str.split(/[ML]+/);
+  splited.shift();
+  let splitedLength = splited.length;
+  
+  for (let i = 0; i < splitedLength; i++)
   {
-    if (!isNaN(parseInt(splited[i])))
-    {
-      startedAction += " " + splited[i];
-    }
-    else
-    {
-      if (startedAction != "")
-      {
-        svgActions.push(startedAction);
-        startedAction = "";
-      }
-      startedAction += splited[i];
-    }
+    let cmdChar = str[0]; 
+    str = str.substring(splited[i].length + 1);
+    svgActions.push(cmdChar + " " + splited[i]);
+    //
   }
+  console.log(svgActions)
+
   // end of parsing
-  // console.log(svgActions)
 
   // translating
   svgActions.forEach(a => {
@@ -123,12 +119,6 @@ function parsePath(element)
   });
   // end translating
 
-  // PEN UP
-  outputPrCode.push({
-    "name": "tool",
-    "t": "felt",
-    "p": "up"
-  });
 
 }
 
@@ -147,8 +137,9 @@ function parseMove(element)
     "name": "move",
     "x": "0",
     "y": "0",
-    "s": SPEED,
-    "t": "linear"
+    "s": TRAVEL_SPEED,
+    "t": "linear",
+    "a": 20000
   }
   let x = element.split(" ")[1];
   let y = element.split(" ")[2];
@@ -173,7 +164,8 @@ function parseLinear(element)
     "x": "0",
     "y": "0",
     "s": SPEED,
-    "t": "linear"
+    "t": "linear",
+    "a": 400000
   }
   let x = element.split(" ")[1];
   let y = element.split(" ")[2];
@@ -226,6 +218,7 @@ function parseCubic(element)
 
 // traduit svg vers tableau que le server peut lire
 function tranductInvers() {
+  resultTraductSvg.push("ZAXIS Z:-3 S:2000\n")
   
   actions.forEach(e => {
 
@@ -233,7 +226,7 @@ function tranductInvers() {
     {
       if (e.x)
       {
-        test1 = e.name.toUpperCase() + ' X:' + e.x + ' Y:' + e.y + ' S:' + e.s + "\n"
+        test1 = e.name.toUpperCase() + ' X:' + e.x + ' Y:' + e.y + ' S:' + e.s + " A:" + e.a + "\n"
         resultTraductSvg.push(test1)
       }
       // if (e.p)
@@ -242,5 +235,18 @@ function tranductInvers() {
       //   resultTraductSvg.push(test1)
       // }
     }
+    else if (e.name == 'tool')
+    {
+      if (e.p == "down")
+      {
+        test1 = "ZAXIS Z:0 S:5000\n"; 
+      }
+      if (e.p == "up")
+      {
+        test1 = "ZAXIS Z:-3 S:25000\n"; 
+      }
+      resultTraductSvg.push(test1)
+    }
   });
+  console.log(resultTraductSvg);
 }

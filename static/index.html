@@ -5,6 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRCodeViewer</title>
+    <link rel="stylesheet" href="newstyle.css">
+    <link rel="icon" href="img/logo.png" type="image/icon type">
+</head>
+<body>
+    
+    <div id="canvas_area">
+        <canvas id="canvas" width="1215" height="765"></canvas>
+    </div>
+    
+    <div id="topbar">
+        <div id="logo">
+            <img src="img/logo.png" alt="">
+        </div>
+        <div id="buttons">
+            <span class="top-button">File<input type="file" name="Ouvrir" id="svg_file_input"></span>
+            <span class="top-button">View</span>
+        </div>
+    </div>
+
+    <div id="side_panel">
+        <div id="machine_control">
+            <div class="layer_one ctrl_layer"><span id="yl_btn" class="ctrl_btn" style="border-radius: 13px 13px 0px 0;">Y-</span></div>
+            <div class="layer_two ctrl_layer"><span id="xl_btn" class="ctrl_btn" style="border-radius: 13px 0px 0px 13px;">X-</span><span id="home_btn" class="ctrl_btn"></span><span id="xp_btn" class="ctrl_btn" style="border-radius: 0 13px 13px 0;">X+</span></div>
+            <div class="layer_three ctrl_layer"><span id="yp_btn" class="ctrl_btn" style="border-radius: 0 0 13px 13px;">Y+</span></div>
+
+        </div>
+        <div class="startplot">
+            <span id="sp_btn" class="ctrl_btn">Start plotting</button>
+        </div>
+    </div>
+
+    <script src="frontend.js"></script>
+    <script src="translate.js"></script>
+	<script src="convert.js"></script>
+    <script src="script.js"></script>
+    <script src="themes.js"></script>
+
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRCodeViewer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,8 +64,8 @@
         <span id="restart"  onclick="restart()">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bootstrap-reboot" viewBox="0 0 16 16">
                 <path class='circle' d="M1.161 8a6.84 6.84 0 1 0 6.842-6.84.58.58 0 1 1 0-1.16 8 8 0 1 1-6.556 3.412l-.663-.577a.58.58 0 0 1 .227-.997l2.52-.69a.58.58 0 0 1 .728.633l-.332 2.592a.58.58 0 0 1-.956.364l-.643-.56A6.812 6.812 0 0 0 1.16 8z"/>
-                <!-- <path d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352h1.141zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324h-1.6z"/> -->
-            </svg>
+            --><!-- <path d="M6.641 11.671V8.843h1.57l1.498 2.828h1.314L9.377 8.665c.897-.3 1.427-1.106 1.427-2.1 0-1.37-.943-2.246-2.456-2.246H5.5v7.352h1.141zm0-3.75V5.277h1.57c.881 0 1.416.499 1.416 1.32 0 .84-.504 1.324-1.386 1.324h-1.6z"/> -->
+            <!--</svg>
         </span>
         
     </div>
@@ -54,4 +102,4 @@
     <script src="themes.js"></script>
 
 </body>
-</html>
+</html>-->
