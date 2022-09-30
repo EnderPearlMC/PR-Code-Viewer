@@ -1,3 +1,5 @@
+#HOW TO USE :
+#You need to have a code_machine.pr file in the working directory, and when you lunch the program it will write the result in it.
 import sys
 import cv2
 import numpy as np
