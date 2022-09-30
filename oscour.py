@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 cap = cv.VideoCapture(0)
 while(1):
-    frame = cv.imread("test.png")
+    frame = cv.imread(cap)
     # Take each frame
     # Convert BGR to HSV
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
