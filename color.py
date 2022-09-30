@@ -5,10 +5,13 @@ img = cv2.imread('color.png')
 file = open("code_machine.pr", "w")
 image = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 # you need to pass a lower range and an upper range for your color as an HSV value(https://blog.blakearchive.org/wp-content/uploads/2019/10/python_hsv.png)
-# (if some range are not passed than those range will be left blank ) ex for red => py color.py 1 0,150,20 10,255,255
+# (if some range are not passed than those range will be left blank ) ex for red => python color.py 1 0,150,20 10,255,255
 typeOfDetection = int(sys.argv[1])
 argument = sys.argv
 
+# Create a bitmap from the array
+
+# Trace the bitmap to a path
 def intify(foo):
     foo = foo.split(',')
     for i in range(0, len(foo)):

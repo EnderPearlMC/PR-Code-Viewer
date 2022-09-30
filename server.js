@@ -4,10 +4,11 @@ const app = express()
 const { SerialPort } = require('serialport')
 const plotting = require('./plotting');
 const bodyParser = require('body-parser') 
+const fs = require('fs');
 
 var plottingStarted = false;
 
- var Aport = new SerialPort({
+var Aport = new SerialPort({
    path:"\\\\.\\COM5",
    baudRate:115200
  });
@@ -44,6 +45,23 @@ app.post('/start', (req, res) => {
   res.end();
 })    
 
+app.get('/get_color_table', (req, res) => {
+  const data = fs.readFileSync('./color_table.json', 'utf8');
+  let json = JSON.parse(data);
+  return res.json(json)
+})    
+
+app.get('/get_tool_take_script', (req, res) => {
+  const data = fs.readFileSync('./tool_take.pr', 'utf8');
+  return res.json(data)
+})    
+
+app.get('/get_tool_remove_script', (req, res) => {
+  const data = fs.readFileSync('./tool_remove.pr', 'utf8');
+  return res.json(data)
+})    
+
+
 // end
 
 app.listen(port, () => {
@@ -54,6 +72,6 @@ Aport.on('data', (data) => {
   if (data == "g")
   {
     Aport.write(plotting.actions[plotting.currentAction]);
-    plotting.currentAction += 1;
+    plotting.currentAction += 1
   }
 })
