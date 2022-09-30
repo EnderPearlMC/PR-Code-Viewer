@@ -44,12 +44,18 @@ var bezierPoints = [];
 var fileChosen = false;
 var firstDraw = false;
 
+
 startUpDraw();
 
 var slider = document.getElementById("speed");
 var speed = 1;
 
 var sliderChange = false;
+
+var colorTable = [];
+var toolTakeScript = "";
+var toolRemoveScript = "";
+var currentTool = "";
 
 /**slider.oninput = function()
 {
@@ -67,7 +73,21 @@ var sliderChange = false;
     startUpDraw()
 })**/
 
-run();
+run()
+
+const getColorTableAndScripts = async () => {
+    const res = await fetch("http://localhost:3000/get_color_table");
+    const colors = await res.json()
+    colorTable = colors;
+    const res2 = await fetch("http://localhost:3000/get_tool_take_script");
+    const script = await res2.json()
+    toolTakeScript = script;
+    const res3 = await fetch("http://localhost:3000/get_tool_remove_script");
+    const script2 = await res3.json()
+    toolRemoveScript = script2;
+}  
+
+getColorTableAndScripts();
 
 function run()
 {
@@ -207,6 +227,10 @@ function determineAction(action)
         }
     }
 
+    if (action["name"] == "tool_change")
+    {
+        currentAction += 1;
+    }
 }
 
 function move(x, y, s)
@@ -266,7 +290,7 @@ function drawLine()
 
     // draw points
     ctx.beginPath();
-    ctx.lineWidth = (1.7 / zoom).toString();
+    ctx.lineWidth = (1.5 / zoom).toString();
     ctx.fillStyle = "blue"
     for (var p = 0; p < points.length; p++)
     {

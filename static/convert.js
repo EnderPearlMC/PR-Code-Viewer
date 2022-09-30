@@ -9,8 +9,8 @@ let transform = [];
 let pathStartPos = null;
 
 // conversion settings
-let SPEED = 2600;
-let TRAVEL_SPEED = 12000;
+let SPEED = 2000;
+let TRAVEL_SPEED = 7500;
 let RESIZE = 1;
 
 //le boutton pour choisir le fichier
@@ -40,9 +40,10 @@ function convert(svgText)
 {
   var parser = new DOMParser();
   var svg = parser.parseFromString(svgText, "image/svg+xml");
-  firstParse(svg.getElementById("layer1"));
+  firstParse(svg.getElementById("svg8"));
   
   // start preview
+  outputPrCode
   setActions(outputPrCode);
   tranductInvers()
   restart();
@@ -52,6 +53,8 @@ function convert(svgText)
 function firstParse(elements)
 {
   let children = elements.childNodes;
+  
+  
 
   children.forEach(c => {
     
@@ -61,6 +64,16 @@ function firstParse(elements)
     }
     else if (c.nodeName == "g")
     {
+      outputPrCode.push({
+        "name": "tool",
+        "t": "felt",
+        "p": "up"
+      });
+      pen = "up";
+      outputPrCode.push({
+        "name": "tool_change",
+        "tool_name": c.getAttribute("inkscape:label")
+      });
       firstParse(c);
     }
   });
@@ -215,7 +228,6 @@ function parseCubic(element)
   }
 }
 
-
 // traduit svg vers tableau que le server peut lire
 function tranductInvers() {
   resultTraductSvg.push("ZAXIS Z:-3 S:2000\n")
@@ -247,6 +259,57 @@ function tranductInvers() {
       }
       resultTraductSvg.push(test1)
     }
+    else if (e.name == 'tool_change')
+    {
+      changeColor(e.tool_name);
+    }
   });
-  console.log(resultTraductSvg);
+  var toolR = colorTable.find(element => element.name == currentTool)
+  var arr = toolRemoveScript.split("\n");
+  arr.forEach(a => {
+    let finalStr = a.replace("{pos}", 4.4 + 35 * toolR.id);
+    resultTraductSvg.push(finalStr.replace("\r", "") + "\n");
+  });
+  currentTool = "";
+  resultTraductSvg.push("ZAXIS Z:-3 S:2000\n")
+  resultTraductSvg.push("MOVE X:0 Y:0 S:7000 A:20000\n")
+  resultTraductSvg.push("ZAXIS Z:0 S:2000\n")
+  console.log(resultTraductSvg)
+}
+
+function changeColor(colorName)
+{
+
+  if (currentTool != "")
+  {
+    var toolR = colorTable.find(element => element.name == currentTool)
+    var arr = toolRemoveScript.split("\n");
+    arr.forEach(a => {
+      let finalStr = a.replace("{pos}", 4.4 + 35 * toolR.id);
+      resultTraductSvg.push(finalStr.replace("\r", "") + "\n");
+    });
+  }
+  var tool = colorTable.find(element => element.name == colorName)
+
+  if (currentTool == "")
+  {
+    var arr2 = toolTakeScript.split("\n");
+    arr2.forEach(a => {
+      let finalStr = a.replace("{pos}", 4.4 + 35 * tool.id);
+      resultTraductSvg.push(finalStr.replace("\r", "") + "\n");
+    });
+  }
+  else
+  {
+    var arr2 = toolTakeScript.split("\n");
+    arr2.forEach(a => {
+      let finalStr = a.replace("{pos}", 4.4 + 35 * tool.id);
+      resultTraductSvg.push(finalStr.replace("\r", "") + "\n");
+    });
+  }
+
+  currentTool = tool.name;
+
+  
+  
 }
