@@ -2,3 +2,6 @@ exemple_machine_code.pr
 code2.pr
 node_modules/
 .vscode/
+oscour.py
+cannyedgedetection.py
+code_machine.pr
