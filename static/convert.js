@@ -6,10 +6,11 @@ var resultTraductSvg = [];
 let transform = [];
 
 // remember start pos to allow Z command
-let pathStartPos = null;
+let pathStartPos = null;        
+
 
 // conversion settings
-let SPEED = 2000;
+let SPEED = 3000;
 let TRAVEL_SPEED = 7500;
 let RESIZE = 1;
 
@@ -267,7 +268,7 @@ function tranductInvers() {
   var toolR = colorTable.find(element => element.name == currentTool)
   var arr = toolRemoveScript.split("\n");
   arr.forEach(a => {
-    let finalStr = a.replace("{pos}", 4.4 + 35 * toolR.id);
+    let finalStr = a.replace("{pos}", 5.2 + 35 * toolR.id);
     resultTraductSvg.push(finalStr.replace("\r", "") + "\n");
   });
   currentTool = "";
@@ -285,7 +286,7 @@ function changeColor(colorName)
     var toolR = colorTable.find(element => element.name == currentTool)
     var arr = toolRemoveScript.split("\n");
     arr.forEach(a => {
-      let finalStr = a.replace("{pos}", 4.4 + 35 * toolR.id);
+      let finalStr = a.replace("{pos}", 5.2 + 35 * toolR.id);
       resultTraductSvg.push(finalStr.replace("\r", "") + "\n");
     });
   }
@@ -295,7 +296,7 @@ function changeColor(colorName)
   {
     var arr2 = toolTakeScript.split("\n");
     arr2.forEach(a => {
-      let finalStr = a.replace("{pos}", 4.4 + 35 * tool.id);
+      let finalStr = a.replace("{pos}", 5.2 + 35 * tool.id);
       resultTraductSvg.push(finalStr.replace("\r", "") + "\n");
     });
   }
@@ -303,7 +304,7 @@ function changeColor(colorName)
   {
     var arr2 = toolTakeScript.split("\n");
     arr2.forEach(a => {
-      let finalStr = a.replace("{pos}", 4.4 + 35 * tool.id);
+      let finalStr = a.replace("{pos}", 5.2 + 35 * tool.id);
       resultTraductSvg.push(finalStr.replace("\r", "") + "\n");
     });
   }
