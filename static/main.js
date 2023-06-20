@@ -57,6 +57,8 @@ var toolTakeScript = "";
 var toolRemoveScript = "";
 var currentTool = "";
 
+var plotEnded = false;
+
 /**slider.oninput = function()
 {
     sliderChange = true;
@@ -87,7 +89,20 @@ const getColorTableAndScripts = async () => {
     toolRemoveScript = script2;
 }  
 
+const isPlotFinished = async () => {
+    var fromServer = await fetch('http://localhost:3000/plot_state')
+    state = await fromServer.json()
+    plotEnded = state;
+}
+
 getColorTableAndScripts();
+setInterval(() => {
+    isPlotFinished();
+    if (plotEnded == true)
+    {
+        alert("Plot finished! - reload page to start a new one")
+    }
+}, 10);
 
 function run()
 {
@@ -105,12 +120,10 @@ function run()
 				
 				// draw head
 				ctx.fillStyle = "gold";
-				ctx.fillRect(headPos[0] * 5, headPos[1] * 5, 20, 20);
+				ctx.fillRect(headPos[0]*5, headPos[1]*5, 20, 20);
 				// action update
 				let act = actions[currentAction];
 				determineAction(act);
-
-                console.log("drawing");
 
 			}
 		}
@@ -163,7 +176,9 @@ function determineAction(action)
         if (action["t"] == "linear")
         {
             move(action["x"], action["y"], action["s"]);
-            time += (((action["s"] / 50) / Math.sqrt((action["x"] - startMovementHeadPos[0])**2 + (action["y"] - startMovementHeadPos[1])**2))) * 10;
+            //time += (((action["s"] / 50) / Math.sqrt((action["x"] - startMovementHeadPos[0])**2 + (action["y"] - startMovementHeadPos[1])**2))) * 10;
+            time += 0.5
+            console.log(time)
         }
         if (action["t"] == "cubic")
         {
@@ -208,6 +223,7 @@ function determineAction(action)
         
         if (time >= 1)
         {
+            console.log("rfgezrgf")
             headPos = [action["x"], action["y"]];
             currentAction += 1;
             startMovementHeadPos = headPos;
@@ -235,7 +251,6 @@ function determineAction(action)
 
 function move(x, y, s)
 { 
-
     headPos = [ lerp(startMovementHeadPos[0], x, time), lerp(startMovementHeadPos[1], y, time) ];
 }
 
@@ -290,8 +305,8 @@ function drawLine()
 
     // draw points
     ctx.beginPath();
-    ctx.lineWidth = (1.5 / zoom).toString();
-    ctx.fillStyle = "blue"
+    ctx.lineWidth = (3 / zoom).toString();
+    ctx.fillStyle = "black"
     for (var p = 0; p < points.length; p++)
     {
         if (points[p][2] == true)

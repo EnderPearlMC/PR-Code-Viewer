@@ -7,11 +7,12 @@ const bodyParser = require('body-parser')
 const fs = require('fs');
 
 var plottingStarted = false;
+var plottingEnded = false;
 
 var Aport = new SerialPort({
    path:"\\\\.\\COM5",
    baudRate:115200
- });
+});
 
 
 const port = 3000
@@ -21,7 +22,7 @@ app.use(express.json({limit: '2500mb'}));
 app.use(express.urlencoded({limit: '2500mb'}));
 
 app.get('/', (req, res) => {
-    res.send()
+  res.send("rfge")
 })
 
 // all commands
@@ -32,7 +33,7 @@ app.post('/home', (req, res) => {
 })    
 
 app.post('/move', (req, res) => {
-  console.log(`MOVE X:${req.body.x} Y:${req.body.y} S:${req.body.s}\n`);
+  console.log(`MOVE X:${req.body.x} Y:${req.body.y} S:${req.body.s} A:${req.body.a}\\n`);
   // Aport.write(`MOVE X:${req.body.x} Y:${req.body.y} S:${req.body.s}\n`);
   res.end();
 })    
@@ -61,6 +62,10 @@ app.get('/get_tool_remove_script', (req, res) => {
   return res.json(data)
 })    
 
+app.get('/plot_state', (req, res) => {
+  const data = false;
+  return res.json(data)
+})    
 
 // end
 
@@ -68,10 +73,27 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
 
+
 Aport.on('data', (data) => {
   if (data == "g")
   {
-    Aport.write(plotting.actions[plotting.currentAction]);
-    plotting.currentAction += 1
+    if (plotting.currentAction < plotting.actions.length)
+    {
+      Aport.write(plotting.actions[plotting.currentAction]);
+      plotting.currentAction += 1
+    }
+    else
+    {
+      if (plottingStarted)
+      {
+        plottingEnded = true;
+        app.get('/plot_state', (req, res) => {
+          const data = true;
+          return res.json(data)
+        })
+        plottingEnded = false;
+        plottingStarted = false;
+      }
+    }
   }
 })

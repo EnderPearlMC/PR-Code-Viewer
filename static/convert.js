@@ -20,6 +20,7 @@ inputS.addEventListener("change", () => {
   if (files.length == 0) return;
   const file = files[0];
   let reader = new FileReader();
+  console.log(file.name)
 
   if (file.name.endsWith(".svg")) {
     console.log("svg chosen");
@@ -27,8 +28,9 @@ inputS.addEventListener("change", () => {
       const file = e.target.result;
       // contenue du fichier ligne par ligne en array
       convert(file);
-  }}
-  if (file.name.endsWith(".pr")) {
+    }
+  }
+  else if (file.name.endsWith(".pr")) {
     console.log("pr chosen");
     reader.onload = (e) => {
       const file = e.target.result;
@@ -53,8 +55,8 @@ function convert(svgText)
   firstParse(svg.getElementById("svg8"));
   
   // start preview
-  outputPrCode
   setActions(outputPrCode);
+  console.log(outputPrCode)
   tranductInvers()
   restart();
   STATE = "preview";

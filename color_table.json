@@ -1,13 +1,13 @@
 [
     {
-        "id": 1,
-        "name": "pen_black",
+        "id": 0,
+        "name": "pen_green",
         "type": "pen",
         "color": [255, 0, 0],
         "offset": [0, 0]
     },
     {
-        "id": 3,
+        "id": 1,
         "name": "pen_red",
         "type": "pen",
         "color": [0, 0, 0],

@@ -14,22 +14,22 @@ home.addEventListener("click", () =>{
 
 xl.addEventListener("click", () =>{
     pos[0] -= 10;
-    sendCommand("move", `x=${pos[0]}&y=${pos[1]}&s=3000`);
+    sendCommand("move", `x=${pos[0]}&y=${pos[1]}&s=3000&a=10000`);
 })
 
 xp.addEventListener("click", () =>{
     pos[0] += 10;
-    sendCommand("move", `x=${pos[0]}&y=${pos[1]}&s=3000`);
+    sendCommand("move", `x=${pos[0]}&y=${pos[1]}&s=3000&a=10000`);
 })
 
 yl.addEventListener("click", () =>{
     pos[1] -= 10;
-    sendCommand("move", `x=${pos[0]}&y=${pos[1]}&s=3000`);
+    sendCommand("move", `x=${pos[0]}&y=${pos[1]}&s=3000&a=10000`);
 })
 
 yp.addEventListener("click", () =>{
     pos[1] += 10;
-    sendCommand("move", `x=${pos[0]}&y=${pos[1]}&s=3000`);
+    sendCommand("move", `x=${pos[0]}&y=${pos[1]}&s=3000&a=10000`);
 })
 
 sp.addEventListener("click", () =>{
